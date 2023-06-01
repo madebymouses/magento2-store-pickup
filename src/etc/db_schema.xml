@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="store_pickup_location" resource="default" engine="innodb" comment="Store Pickup Location">
+        <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="true" comment="Location ID"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false" default="1" comment="Is Active"/>
+        <column xsi:type="varchar" name="company" nullable="true" length="255" comment="Company"/>
+        <column xsi:type="text" name="street" nullable="false" comment="Street Address"/>
+        <column xsi:type="varchar" name="postcode" nullable="true" length="255" comment="Zip/Postal Code"/>
+        <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
+        <column xsi:type="varchar" name="country_id" nullable="false" length="255" comment="Country"/>
+        <column xsi:type="varchar" name="region" nullable="true" length="255" comment="State/Province"/>
+        <column xsi:type="int" name="region_id" unsigned="true" nullable="true" identity="false" comment="State/Province"/>
+        <column xsi:type="varchar" name="telephone" nullable="false" length="255" comment="Phone Number"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="false" default="0" comment="Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="location_id"/>
+        </constraint>
+    </table>
+    <table name="store_pickup_location_store" resource="default" engine="innodb" comment="Store Pickup Location To Store Linkage Table">
+        <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="false"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="location_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_STORE_LOCATION_ID_STORE_PICKUP_LOCATION_LOCATION_ID" table="store_pickup_location_store"
+                    column="location_id" referenceTable="store_pickup_location" referenceColumn="location_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_STORE_STORE_ID_STORE_STORE_ID" table="store_pickup_location_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="STORE_PICKUP_LOCATION_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="store_pickup_location_customer_group" resource="default" engine="innodb" comment="Store Pickup Location To Customer Group Linkage Table">
+        <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="false"/>
+        <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" identity="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="location_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_LOCATION_ID_STORE_PICKUP_LOCATION_LOCATION_ID" table="store_pickup_location_customer_group"
+                    column="location_id" referenceTable="store_pickup_location" referenceColumn="location_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_CUSTOMER_GROUP_ID_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" table="store_pickup_location_customer_group"
+                    column="customer_group_id" referenceTable="customer_group" referenceColumn="customer_group_id" onDelete="CASCADE"/>
+        <index referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" indexType="btree">
+            <column name="customer_group_id"/>
+        </index>
+    </table>
+</schema>

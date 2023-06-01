@@ -1,0 +1,48 @@
+{
+    "store_pickup_location": {
+        "column": {
+            "location_id": true,
+            "is_active": true,
+            "company": true,
+            "street": true,
+            "postcode": true,
+            "city": true,
+            "country_id": true,
+            "region": true,
+            "region_id": true,
+            "telephone": true,
+            "price": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "store_pickup_location_store": {
+        "column": {
+            "location_id": true,
+            "store_id": true
+        },
+        "index": {
+            "STORE_PICKUP_LOCATION_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_130B207A59BACF6912047DA9EBB06B03": true,
+            "STORE_PICKUP_LOCATION_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "store_pickup_location_customer_group": {
+        "column": {
+            "location_id": true,
+            "customer_group_id": true
+        },
+        "index": {
+            "STORE_PICKUP_LOCATION_CUSTOMER_GROUP_CUSTOMER_GROUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_98686A6C6C1705660C917968BE992FEC": true,
+            "FK_F4B64DA1E3C913D5963B36C9DB69146C": true
+        }
+    }
+}
