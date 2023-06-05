@@ -2,7 +2,7 @@
     "name": "madebymouses/magento2-store-pickup",
     "description": "Store Pickup module for Magento 2",
     "type": "magento2-module",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "autoload": {
         "files": [
             "src/registration.php"
