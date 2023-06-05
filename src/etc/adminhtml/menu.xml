@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MadeByMouses_StorePickup::store_pickup" title="Store Pickup" translate="title" module="MadeByMouses_StorePickup" sortOrder="30" parent="Magento_Backend::stores" resource="Magento_Backend::stores"/>
+        <add id="MadeByMouses_StorePickup::store_pickup_locations" title="Locations" translate="title" module="MadeByMouses_StorePickup" sortOrder="10" parent="MadeByMouses_StorePickup::store_pickup" action="store_pickup/location" resource="MadeByMouses_StorePickup::manage_locations"/>
+    </menu>
+</config>
