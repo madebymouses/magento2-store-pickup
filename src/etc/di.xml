@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MadeByMouses\StorePickup\Api\LocationRepositoryInterface" type="MadeByMouses\StorePickup\Model\LocationRepository"/>
+    <preference for="MadeByMouses\StorePickup\Api\Data\LocationInterface" type="MadeByMouses\StorePickup\Model\Location"/>
+    <preference for="MadeByMouses\StorePickup\Api\Data\LocationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>
