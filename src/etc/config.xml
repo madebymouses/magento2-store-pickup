@@ -3,7 +3,7 @@
     <default>
         <carriers>
             <store_pickup>
-                <model>MadeByMouses\StorePickup\Model\Carrier</model>
+                <model>MadeByMouses\StorePickup\Model\Carrier\StorePickup</model>
                 <active>0</active>
                 <title>Store Pickup</title>
             </store_pickup>

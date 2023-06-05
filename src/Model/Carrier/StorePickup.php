@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MadeByMouses\StorePickup\Model;
+namespace MadeByMouses\StorePickup\Model\Carrier;
 
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
 use Magento\Shipping\Model\Rate\Result;
 
-class Carrier extends AbstractCarrier implements CarrierInterface
+class StorePickup extends AbstractCarrier implements CarrierInterface
 {
     /**
      * @var string
@@ -71,12 +71,12 @@ class Carrier extends AbstractCarrier implements CarrierInterface
 
         $rate = $this->rateMethodFactory->create([
             'data' => [
-                'carrier' => $this->_code,
+                'carrier'       => $this->_code,
                 'carrier_title' => $this->getConfigData('title'),
-                'method' => 'store_pickup',
-                'method_title' => __('Store Pickup'),
-                'price' => 0.00,
-                'cost' => 0.00,
+                'method'        => 'store_pickup',
+                'method_title'  => __('Store Pickup'),
+                'price'         => 0.00,
+                'cost'          => 0.00,
             ],
         ]);
 
@@ -92,6 +92,8 @@ class Carrier extends AbstractCarrier implements CarrierInterface
      */
     public function getAllowedMethods()
     {
-        return [$this->_code => $this->getConfigData('name')];
+        return [
+            $this->_code => $this->getConfigData('name')
+        ];
     }
 }
