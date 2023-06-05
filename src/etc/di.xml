@@ -3,4 +3,19 @@
     <preference for="MadeByMouses\StorePickup\Api\LocationRepositoryInterface" type="MadeByMouses\StorePickup\Model\LocationRepository"/>
     <preference for="MadeByMouses\StorePickup\Api\Data\LocationInterface" type="MadeByMouses\StorePickup\Model\Location"/>
     <preference for="MadeByMouses\StorePickup\Api\Data\LocationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <virtualType name="MadeByMouses\StorePickup\Model\ResourceModel\Location\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">store_pickup_location</argument>
+            <argument name="resourceModel" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Collection</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="store_pickup_location_listing_data_source" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
