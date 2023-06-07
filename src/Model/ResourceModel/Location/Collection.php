@@ -67,6 +67,7 @@ class Collection extends AbstractCollection
         );
 
         $this->_map['fields']['store'] = 'store_table.store_id';
+        $this->_map['fields']['customer_group'] = 'customer_group_table.customer_group_id';
         $this->_map['fields']['location_id'] = 'main_table.location_id';
     }
 
@@ -157,6 +158,14 @@ class Collection extends AbstractCollection
             $store[] = Store::DEFAULT_STORE_ID;
 
             $this->addFilter('store', ['in' => $store], 'public');
+
+            return $this;
+        }
+
+        if ($field === 'customer_group_id') {
+            $this->addFilter('customer_group', $condition, 'public');
+
+            return $this;
         }
 
         return parent::addFieldToFilter($field, $condition);
@@ -179,6 +188,30 @@ class Collection extends AbstractCollection
             );
         }
 
+        if ($this->getFilter('customer_group')) {
+            $this->getSelect()->join(
+                ['customer_group_table' => $this->getTable('store_pickup_location_customer_group')],
+                'main_table.' . $this->_idFieldName . ' = store_table.' . $this->_idFieldName,
+                []
+            )->group(
+                'main_table.' . $this->_idFieldName
+            );
+        }
+
         parent::_renderFiltersBefore();
+    }
+
+    /**
+     * Add filter by store
+     *
+     * @param int|array|\Magento\Store\Model\Store $store
+     * @param bool $withAdmin
+     * @return $this
+     */
+    public function addStoreFilter($store, $withAdmin = true)
+    {
+        $this->performAddStoreFilter($store, $withAdmin);
+
+        return $this;
     }
 }
