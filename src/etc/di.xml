@@ -45,12 +45,15 @@
             <argument name="extensionActions" xsi:type="array">
                 <item name="MadeByMouses\StorePickup\Api\Data\LocationInterface" xsi:type="array">
                     <item name="read" xsi:type="array">
+                        <item name="customerGroupReader" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\CustomerGroup\ReadHandler</item>
                         <item name="storeReader" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\Store\ReadHandler</item>
                     </item>
                     <item name="create" xsi:type="array">
+                        <item name="customerGroupCreator" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\CustomerGroup\SaveHandler</item>
                         <item name="storeCreator" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\Store\SaveHandler</item>
                     </item>
                     <item name="update" xsi:type="array">
+                        <item name="customerGroupUpdater" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\CustomerGroup\SaveHandler</item>
                         <item name="storeUpdater" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Relation\Store\SaveHandler</item>
                     </item>
                 </item>

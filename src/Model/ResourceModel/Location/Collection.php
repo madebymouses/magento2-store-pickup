@@ -75,38 +75,65 @@ class Collection extends AbstractCollection
         $linkedIds = $this->getColumnValues($this->_idFieldName);
 
         if (count($linkedIds)) {
-            $connection = $this->getConnection();
-            $select = $connection->select()->from(['store_pickup_location_store' => $this->getTable('store_pickup_location_store')])
-                ->where('store_pickup_location_store.location_id IN (?)', $linkedIds);
-            $result = $connection->fetchAll($select);
-            if ($result) {
-                $storesData = [];
-                foreach ($result as $storeData) {
-                    $storesData[$storeData[$this->_idFieldName]][] = $storeData['store_id'];
-                }
-
-                foreach ($this as $item) {
-                    $linkedId = $item->getData($this->_idFieldName);
-                    if (!isset($storesData[$linkedId])) {
-                        continue;
-                    }
-                    $storeIdKey = array_search(Store::DEFAULT_STORE_ID, $storesData[$linkedId], true);
-                    if ($storeIdKey !== false) {
-                        $stores = $this->storeManager->getStores(false, true);
-                        $storeId = current($stores)->getId();
-                        $storeCode = key($stores);
-                    } else {
-                        $storeId = current($storesData[$linkedId]);
-                        $storeCode = $this->storeManager->getStore($storeId)->getCode();
-                    }
-                    $item->setData('_first_store_id', $storeId);
-                    $item->setData('store_code', $storeCode);
-                    $item->setData('store_id', $storesData[$linkedId]);
-                }
-            }
+            $this->loadStores($linkedIds);
+            $this->loadCustomerGroups($linkedIds);
         }
 
         return parent::_afterLoad();
+    }
+
+    private function loadStores(array $linkedIds)
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()->from(['store_pickup_location_store' => $this->getTable('store_pickup_location_store')])
+            ->where('store_pickup_location_store.location_id IN (?)', $linkedIds);
+        $result = $connection->fetchAll($select);
+
+        if ($result) {
+            $storesData = [];
+            foreach ($result as $storeData) {
+                $storesData[$storeData[$this->_idFieldName]][] = $storeData['store_id'];
+            }
+
+            foreach ($this as $item) {
+                $linkedId = $item->getData($this->_idFieldName);
+                if (!isset($storesData[$linkedId])) {
+                    continue;
+                }
+                $storeIdKey = array_search(Store::DEFAULT_STORE_ID, $storesData[$linkedId], true);
+                if ($storeIdKey !== false) {
+                    $stores = $this->storeManager->getStores(false, true);
+                    $storeId = current($stores)->getId();
+                    $storeCode = key($stores);
+                } else {
+                    $storeId = current($storesData[$linkedId]);
+                    $storeCode = $this->storeManager->getStore($storeId)->getCode();
+                }
+                $item->setData('_first_store_id', $storeId);
+                $item->setData('store_code', $storeCode);
+                $item->setData('store_id', $storesData[$linkedId]);
+            }
+        }
+    }
+
+    private function loadCustomerGroups(array $linkedIds)
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()->from(['store_pickup_location_customer_group' => $this->getTable('store_pickup_location_customer_group')])
+            ->where('store_pickup_location_customer_group.location_id IN (?)', $linkedIds);
+        $result = $connection->fetchAll($select);
+
+        if ($result) {
+            $customerGroups = [];
+            foreach ($result as $customerGroup) {
+                $customerGroups[$customerGroup[$this->_idFieldName]][] = $customerGroup['customer_group_id'];
+            }
+
+            foreach ($this as $item) {
+                $linkedId = $item->getData($this->_idFieldName);
+                $item->setData('customer_group_ids', $customerGroups[$linkedId] ?? []);
+            }
+        }
     }
 
     /**

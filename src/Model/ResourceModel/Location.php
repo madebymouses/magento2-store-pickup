@@ -60,6 +60,26 @@ class Location extends AbstractDb
     }
 
     /**
+     * @param int $id
+     * @return array
+     */
+    public function getCustomerGroupIds($id)
+    {
+        $connection = $this->getConnection();
+
+        $select = $connection->select()
+            ->from(['splcg' => $this->getTable('store_pickup_location_customer_group')], 'customer_group_id')
+            ->join(
+                ['spl' => $this->getMainTable()],
+                'splcg.location_id = spl.location_id',
+                []
+            )
+            ->where('spl.location_id = :location_id');
+
+        return $connection->fetchCol($select, ['location_id' => (int)$id]);
+    }
+
+    /**
      * @inheritDoc
      */
     public function load(AbstractModel $object, $value, $field = null)
