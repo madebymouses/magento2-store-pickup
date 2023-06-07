@@ -4,12 +4,14 @@
     <preference for="MadeByMouses\StorePickup\Api\Data\LocationInterface" type="MadeByMouses\StorePickup\Model\Location"/>
     <preference for="MadeByMouses\StorePickup\Api\Data\LocationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
-    <virtualType name="MadeByMouses\StorePickup\Model\ResourceModel\Location\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <type name="MadeByMouses\StorePickup\Model\ResourceModel\Location\Grid\Collection">
         <arguments>
             <argument name="mainTable" xsi:type="string">store_pickup_location</argument>
-            <argument name="resourceModel" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location\Collection</argument>
+            <argument name="eventPrefix" xsi:type="string">store_pickup_location_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">location_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MadeByMouses\StorePickup\Model\ResourceModel\Location</argument>
         </arguments>
-    </virtualType>
+    </type>
 
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
