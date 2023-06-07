@@ -8,6 +8,7 @@ interface LocationInterface
 {
     const LOCATION_ID = 'location_id';
     const IS_ACTIVE = 'is_active';
+    const LABEL = 'label';
     const COMPANY = 'company';
     const STREET = 'street';
     const POSTCODE = 'postcode';
@@ -27,6 +28,11 @@ interface LocationInterface
      * @return int|bool
      */
     public function getIsActive();
+
+    /**
+     * @return string|null
+     */
+    public function getLabel();
 
     /**
      * @return string|null
@@ -84,6 +90,12 @@ interface LocationInterface
      * @return \MadeByMouses\StorePickup\Api\Data\LocationInterface
      */
     public function setIsActive($isActive);
+
+    /**
+     * @param string $label
+     * @return \MadeByMouses\StorePickup\Api\Data\LocationInterface
+     */
+    public function setLabel($label);
 
     /**
      * @param string $company

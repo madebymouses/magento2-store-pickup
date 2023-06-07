@@ -53,6 +53,22 @@ class Location extends AbstractModel implements LocationInterface
     /**
      * @inheritDoc
      */
+    public function getLabel()
+    {
+        return $this->getData(self::LABEL);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setLabel($label)
+    {
+        return $this->setData(self::LABEL, $label);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getCompany()
     {
         return $this->getData(self::COMPANY);

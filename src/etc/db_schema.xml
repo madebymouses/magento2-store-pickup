@@ -3,9 +3,10 @@
     <table name="store_pickup_location" resource="default" engine="innodb" comment="Store Pickup Location">
         <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="true" comment="Location ID"/>
         <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false" default="1" comment="Is Active"/>
-        <column xsi:type="varchar" name="company" nullable="true" length="255" comment="Company"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Label"/>
+        <column xsi:type="varchar" name="company" nullable="false" length="255" comment="Company"/>
         <column xsi:type="text" name="street" nullable="false" comment="Street Address"/>
-        <column xsi:type="varchar" name="postcode" nullable="true" length="255" comment="Zip/Postal Code"/>
+        <column xsi:type="varchar" name="postcode" nullable="false" length="255" comment="Zip/Postal Code"/>
         <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
         <column xsi:type="varchar" name="country_id" nullable="false" length="255" comment="Country"/>
         <column xsi:type="varchar" name="region" nullable="true" length="255" comment="State/Province"/>
@@ -23,9 +24,9 @@
             <column name="location_id"/>
             <column name="store_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_STORE_LOCATION_ID_STORE_PICKUP_LOCATION_LOCATION_ID" table="store_pickup_location_store"
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOC_STORE_LOC_ID_STORE_PICKUP_LOC_LOC_ID" table="store_pickup_location_store"
                     column="location_id" referenceTable="store_pickup_location" referenceColumn="location_id" onDelete="CASCADE"/>
-        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_STORE_STORE_ID_STORE_STORE_ID" table="store_pickup_location_store"
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOC_STORE_STORE_ID_STORE_PICKUP_LOC_STORE_ID" table="store_pickup_location_store"
                     column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
         <index referenceId="STORE_PICKUP_LOCATION_STORE_STORE_ID" indexType="btree">
             <column name="store_id"/>
@@ -38,9 +39,9 @@
             <column name="location_id"/>
             <column name="customer_group_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_LOCATION_ID_STORE_PICKUP_LOCATION_LOCATION_ID" table="store_pickup_location_customer_group"
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOC_CUST_GRP_LOC_ID_STORE_PICKUP_LOC_LOC_ID" table="store_pickup_location_customer_group"
                     column="location_id" referenceTable="store_pickup_location" referenceColumn="location_id" onDelete="CASCADE"/>
-        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_CUSTOMER_GROUP_ID_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" table="store_pickup_location_customer_group"
+        <constraint xsi:type="foreign" referenceId="STORE_PICKUP_LOCK_CUST_GRP_CUST_GRP_ID_CUST_GRP_CUST_GRP_ID" table="store_pickup_location_customer_group"
                     column="customer_group_id" referenceTable="customer_group" referenceColumn="customer_group_id" onDelete="CASCADE"/>
         <index referenceId="STORE_PICKUP_LOCATION_CUSTOMER_GROUP_CUSTOMER_GROUP_ID" indexType="btree">
             <column name="customer_group_id"/>

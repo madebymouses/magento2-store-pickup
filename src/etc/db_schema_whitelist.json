@@ -3,6 +3,7 @@
         "column": {
             "location_id": true,
             "is_active": true,
+            "label": true,
             "company": true,
             "street": true,
             "postcode": true,
