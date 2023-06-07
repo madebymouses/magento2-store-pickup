@@ -194,5 +194,13 @@ class Location extends AbstractModel implements LocationInterface
     {
         return $this->setData(self::PRICE, $price);
     }
+
+    /**
+     * @return int[]
+     */
+    public function getStores()
+    {
+        return $this->hasData('stores') ? $this->getData('stores') : $this->getData('store_id');
+    }
 }
 
