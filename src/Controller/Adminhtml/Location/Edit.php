@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MadeByMouses\StorePickup\Controller\Adminhtml\Location;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 
-class Index extends \Magento\Backend\App\Action implements HttpGetActionInterface
+class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
     /**
      * Authorization level of a basic admin session
@@ -13,6 +15,8 @@ class Index extends \Magento\Backend\App\Action implements HttpGetActionInterfac
     const ADMIN_RESOURCE = 'MadeByMouses_StorePickup::manage_locations';
 
     /**
+     * New action
+     *
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
@@ -21,7 +25,7 @@ class Index extends \Magento\Backend\App\Action implements HttpGetActionInterfac
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('MadeByMouses_StorePickup::manage_locations');
 
-        $resultPage->getConfig()->getTitle()->prepend(__('Manage Locations'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Add new location'));
 
         return $resultPage;
     }
