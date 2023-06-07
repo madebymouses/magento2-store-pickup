@@ -65,7 +65,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
                 try {
                     $location = $this->locationRepository->get($locationId);
                 } catch (LocalizedException $exception) {
-                    $this->messageManager->addErrorMessage(__('This Location no longer exists.'));
+                    $this->messageManager->addErrorMessage(__('This location no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
                 }
             } else {
@@ -76,7 +76,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
 
             try {
                 $this->locationRepository->save($location);
-                $this->messageManager->addSuccessMessage(__('You saved the Location.'));
+                $this->messageManager->addSuccessMessage(__('You saved the location.'));
                 $this->dataPersistor->clear('store_pickup_location');
 
                 if ($this->getRequest()->getParam('back')) {
@@ -86,7 +86,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
-                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Location.'));
+                $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the location.'));
             }
 
             $this->dataPersistor->set('store_pickup_location', $data);

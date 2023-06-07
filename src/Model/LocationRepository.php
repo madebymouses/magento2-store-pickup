@@ -126,7 +126,7 @@ class LocationRepository implements LocationRepositoryInterface
             $this->resource->delete($locationModel);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(__(
-                'Could not delete the Location: %1',
+                'Could not delete the location: %1',
                 $exception->getMessage()
             ));
         }

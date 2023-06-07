@@ -16,7 +16,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
         $data = [];
         if ($this->getLocationId()) {
             $data = [
-                'label'      => __('Delete Location'),
+                'label'      => __('Delete location'),
                 'class'      => 'delete',
                 'on_click'   => 'deleteConfirm(\'' . __(
                         'Are you sure you want to do this?'

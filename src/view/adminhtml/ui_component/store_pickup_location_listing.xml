@@ -14,7 +14,7 @@
             <button name="add">
                 <url path="*/*/new"/>
                 <class>primary</class>
-                <label translate="true">Add new Location</label>
+                <label translate="true">Add new location</label>
             </button>
         </buttons>
     </settings>
@@ -52,19 +52,45 @@
                 </settings>
             </filterSelect>
         </filters>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected locations?</message>
+                        <title translate="true">Delete locations</title>
+                    </confirm>
+                    <url path="store_pickup/location/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="status">
+                <settings>
+                    <type>status</type>
+                    <label translate="true">Change status</label>
+                    <actions>
+                        <action name="0">
+                            <type>enable</type>
+                            <label translate="true">Enable</label>
+                            <url path="store_pickup/location/massStatus">
+                                <param name="status">1</param>
+                            </url>
+                        </action>
+                        <action name="1">
+                            <type>disable</type>
+                            <label translate="true">Disable</label>
+                            <url path="store_pickup/location/massStatus">
+                                <param name="status">0</param>
+                            </url>
+                        </action>
+                    </actions>
+                </settings>
+            </action>
+        </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="store_pickup_location_columns">
         <settings>
-            <editorConfig>
-                <param name="selectProvider" xsi:type="string">store_pickup_location_listing.store_pickup_location_listing.store_pickup_location_columns.ids</param>
-                <param name="enabled" xsi:type="boolean">true</param>
-                <param name="indexField" xsi:type="string">location_id</param>
-                <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="store_pickup/Location/inlineEdit"/>
-                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
-                </param>
-            </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
                     <item name="provider" xsi:type="string">store_pickup_location_listing.store_pickup_location_listing.store_pickup_location_columns_editor</item>
@@ -156,5 +182,12 @@
                 <label translate="true">Price</label>
             </settings>
         </column>
+        <actionsColumn name="actions" class="MadeByMouses\StorePickup\Ui\Component\Listing\Column\LocationActions">
+            <settings>
+                <indexField>location_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

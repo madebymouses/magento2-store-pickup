@@ -21,7 +21,7 @@ class Index extends \Magento\Backend\App\Action implements HttpGetActionInterfac
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->setActiveMenu('MadeByMouses_StorePickup::manage_locations');
 
-        $resultPage->getConfig()->getTitle()->prepend(__('Manage Locations'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Manage locations'));
 
         return $resultPage;
     }

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace MadeByMouses\StorePickup\Controller\Adminhtml\Location;
 
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\Controller\ResultFactory;
 
-class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
+class Delete extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
     /**
      * Authorization level of a basic admin session
@@ -33,31 +33,29 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     }
 
     /**
-     * New action
-     *
      * @return \Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
+        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
+
         $locationId = $this->getRequest()->getParam('location_id');
         if (!empty($locationId)) {
             try {
                 $location = $this->locationRepository->get($locationId);
-            } catch (\Exception $exception) {
-                $this->messageManager->addErrorMessage(__('This location no longer exists.'));
+                $this->locationRepository->delete($location);
 
-                return $this->resultRedirectFactory
-                    ->create()
-                    ->setPath('*/*/');
+                $this->messageManager->addSuccessMessage(__('You deleted the location.'));
+
+                return $resultRedirect->setPath('*/*/');
+            } catch (\Exception $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+
+                return $resultRedirect->setPath('*/*/edit', ['location_id' => $locationId]);
             }
         }
 
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
-        $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
-
-        $resultPage->setActiveMenu('MadeByMouses_StorePickup::manage_locations');
-        $resultPage->getConfig()->getTitle()->prepend($locationId ? __('Edit location') : ('Add new location'));
-
-        return $resultPage;
+        return $resultRedirect->setPath('*/*/');
     }
 }
