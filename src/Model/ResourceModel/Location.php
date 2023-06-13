@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MadeByMouses\StorePickup\Model\ResourceModel;
 
 use Magento\Framework\EntityManager\EntityManager;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
@@ -93,6 +94,12 @@ class Location extends AbstractDb
      */
     public function save(AbstractModel $object)
     {
+        if (!$this->isUniqueIdentifier($object)) {
+            throw new LocalizedException(
+                __('A location identifier with the same value already exists.')
+            );
+        }
+
         $this->entityManager->save($object);
         return $this;
     }
@@ -104,5 +111,30 @@ class Location extends AbstractDb
     {
         $this->entityManager->delete($object);
         return $this;
+    }
+
+    /**
+     * @param \Magento\Framework\Model\AbstractModel $object
+     *
+     * @return bool
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function isUniqueIdentifier(AbstractModel $object)
+    {
+        $connection = $this->getConnection();
+
+        $select = $connection->select()
+            ->from(['spl' => $this->getMainTable()])
+            ->where('spl.identifier = ?  ', $object->getData('identifier'));
+
+        if ($object->getId()) {
+            $select->where('spl.location_id <> ?', $object->getId());
+        }
+
+        if ($this->getConnection()->fetchRow($select)) {
+            return false;
+        }
+
+        return true;
     }
 }

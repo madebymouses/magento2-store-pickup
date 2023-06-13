@@ -17,6 +17,9 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="location_id"/>
         </constraint>
+        <constraint xsi:type="unique" referenceId="STORE_PICKUP_LOCATION_IDENTIFIER">
+            <column name="identifier"/>
+        </constraint>
     </table>
     <table name="store_pickup_location_store" resource="default" engine="innodb" comment="Store Pickup Location To Store Linkage Table">
         <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="false"/>

@@ -16,7 +16,8 @@
             "identifier": true
         },
         "constraint": {
-            "PRIMARY": true
+            "PRIMARY": true,
+            "STORE_PICKUP_LOCATION_IDENTIFIER": true
         }
     },
     "store_pickup_location_store": {
