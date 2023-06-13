@@ -3,6 +3,7 @@
     <table name="store_pickup_location" resource="default" engine="innodb" comment="Store Pickup Location">
         <column xsi:type="int" name="location_id" unsigned="true" nullable="false" identity="true" comment="Location ID"/>
         <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false" default="1" comment="Is Active"/>
+        <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="Identifier"/>
         <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Label"/>
         <column xsi:type="varchar" name="company" nullable="false" length="255" comment="Company"/>
         <column xsi:type="text" name="street" nullable="false" comment="Street Address"/>

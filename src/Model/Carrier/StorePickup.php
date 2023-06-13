@@ -95,7 +95,7 @@ class StorePickup extends AbstractCarrier implements CarrierInterface
                 'data' => [
                     'carrier'       => $this->_code,
                     'carrier_title' => $this->getConfigData('title'),
-                    'method'        => 'location_' . $location->getId(),
+                    'method'        => 'location_' . $location->getIdentifier(),
                     'method_title'  => $location->getLabel(),
                     'price'         => $location->getPrice(),
                     'cost'          => $location->getPrice(),

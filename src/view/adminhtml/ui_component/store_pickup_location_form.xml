@@ -66,7 +66,23 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="label" formElement="input" sortOrder="20">
+        <field name="identifier" formElement="input" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">location</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="no-marginal-whitespace" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Identifier</label>
+                <dataScope>identifier</dataScope>
+            </settings>
+        </field>
+        <field name="label" formElement="input" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">location</item>
@@ -80,7 +96,7 @@
                 </validation>
             </settings>
         </field>
-        <field name="storeviews" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView" sortOrder="30">
+        <field name="storeviews" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView" sortOrder="40">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">location</item>
@@ -107,7 +123,7 @@
                 </multiselect>
             </formElements>
         </field>
-        <field name="customer_group_ids" formElement="multiselect" sortOrder="40">
+        <field name="customer_group_ids" formElement="multiselect" sortOrder="50">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">location</item>
@@ -129,7 +145,7 @@
                 </multiselect>
             </formElements>
         </field>
-        <field name="price" formElement="input" sortOrder="50">
+        <field name="price" formElement="input" sortOrder="60">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">location</item>

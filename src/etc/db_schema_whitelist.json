@@ -12,7 +12,8 @@
             "region": true,
             "region_id": true,
             "telephone": true,
-            "price": true
+            "price": true,
+            "identifier": true
         },
         "constraint": {
             "PRIMARY": true
